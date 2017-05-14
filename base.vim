@@ -55,6 +55,8 @@ endif
 
 set diffexpr=
 
+" apply the changes of vimrc immediately
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> User interface
@@ -140,8 +142,6 @@ endif
 " Avoid garbled characters in Chinese language windows OS
 "let $LANG='en'
 "set langmenu=en
-"source $VIMRUNTIME/delmenu.vim
-"source $VIMRUNTIME/menu.vim
 
 " Ignore compiled files
 "set wildignore=*.o,*~,*.pyc
@@ -151,16 +151,11 @@ endif
 "  set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 "endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Colors, font and file format
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-" Load all color schemes by SetColors
-"SetColors all
-"nmap <leader>9 :SetColors all
 
 " Set color scheme
 if has('gui_running')
@@ -170,7 +165,6 @@ else
     " Non-GUI (terminal) colors
     colorscheme desert
 endif
-
 
 " Set background color
 set background=dark
@@ -233,6 +227,7 @@ map <leader>$ :syntax sync fromstart<cr>
 if has("gui_running")
     if exists("&cursorline")
         set cursorline
+        set cursorcolumn
     endif
 endif
 
@@ -241,7 +236,6 @@ set ffs=unix,dos,mac
 
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Text, tab and indent related
@@ -275,7 +269,6 @@ set wrap
 if has("cindent")
     set cindent
 endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Files, backups and undo
@@ -314,20 +307,7 @@ set laststatus=2
 " Format the status line
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 set statusline=\ %{HasPaste()}%F%m%r\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L\ \ Column:\ %c
-"set statusline=
-"set statusline+=%2*%-3.3n%0*\ " buffer number
-"set statusline+=%f\ " file name
-"set statusline+=%h%1*%m%r%w%0* " flags
-"set statusline+=[
-"set statusline+=%{strlen(&ft)?&ft:'none'}, " filetype
-"set statusline+=%{&encoding}, " encoding
-"set statusline+=%{&fileformat}] " file format
-"if filereadable(expand("$VIM/vimfiles/plugin/vimbuddy.vim"))
-"    set statusline+=\ %{VimBuddy()} " vim buddy
-"endif
-"set statusline+=%= " right align
-"set statusline+=%2*0x%-8B\ " current char
-"set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
+
 " special statusbar for special windows
 if has("autocmd")
 	au FileType qf
@@ -359,16 +339,11 @@ if has('title') && (has('gui_running') || &title)
 	set titlestring+=\ -\ %{v:progname} " program name
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map space to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
-" map <c-space> ?
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -420,13 +395,11 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> General Autocommand
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Switch to current dir
 map <leader>cd :cd %:p:h<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Parenthesis/bracket expanding
@@ -447,7 +420,6 @@ vnoremap $3 <esc>`>a}<esc>`<i{<esc>
 vnoremap $$ <esc>`>a"<esc>`<i"<esc>
 vnoremap $q <esc>`>a'<esc>`<i'<esc>
 vnoremap $e <esc>`>a"<esc>`<i"<esc>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> For brackets auto-complete
@@ -477,7 +449,6 @@ function ClosePair(char)
 	endif
 endf
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Visual mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -485,7 +456,6 @@ endf
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> General Abbrev
@@ -518,7 +488,6 @@ if has("mac") || has("macunix")
     vmap <D-k> <M-k>
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Command-line config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -548,9 +517,6 @@ func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
 
-"cno $q <C->eDeleteTillSlash()<cr>
-"cno $c e <C->eCurrentFileDir("e")<cr>
-"cno $tc <C->eCurrentFileDir("tabnew")<cr>
 cno $th tabnew ~/
 cno $td tabnew ~/Desktop/
 
@@ -559,13 +525,9 @@ cno <C-A> <Home>
 cno <C-E> <End>
 cno <C-K> <C-U>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Buffer related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Fast open a buffer by search for a name
-"map <c-q> :sb
-
 "Open a dummy buffer for paste
 map <leader>q :e ~/buffer<cr>
 
@@ -595,7 +557,6 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Folding
@@ -654,14 +615,8 @@ let use_xhtml = 1
 " Remove the Windows ^M
 noremap <leader>m :%s/\r//g<CR>
 
-" Paste toggle - when pasting something in, don't indent.
-"set pastetoggle=<F3>
-
 " Remove indenting on empty line
 map <F2> :%s/s*$//g<cr>:noh<cr>''
-
-" Super paste
-"ino <C-v> <esc>:set paste<cr>mui<C-R>+<esc>mv'uV'v=:set nopaste<cr>
 
 " clipboard with xclip
 if has("unix")
@@ -680,7 +635,6 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Helper functions
