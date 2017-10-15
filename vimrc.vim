@@ -12,7 +12,7 @@
 "                  1 NERDTree
 "                  2 GtagsCscope
 "                  3 ctrlp
-"                  4 taglist
+"                  4 tagbar/taglist
 "                  5 vim-signature
 "                  6 vim-syntax-extra
 "                  7 YouCompleteMe
@@ -30,7 +30,7 @@ filetype plugin indent on
 
 " === My information
 ia xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-"iab xname Amir Salihefendic
+"iab xmail example@email.com
 
 " === Set color scheme:
 " desert, molokai, gruvbox, colorsbox-material, herald, pacific, lucius
@@ -65,13 +65,8 @@ set wrap
 let mapleader=","                " e.g., <leader>w to save file
 let g:mapleader=","
 map <space> /                                " Map <Space>/C-<Space> to search
-""" Spell checking
-map <leader>ss :setlocal spell!<cr>
-""" Buffers
-map <leader>bd :Bclose<cr>:tabclose<cr>gT    
-map <leader>ba :bufdo bd<cr>
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+map <leader>ss :setlocal spell!<cr>          " Spell checking
+
 """ Move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -91,10 +86,14 @@ map <leader>q :e ~/buffer<cr>
 
 map <C-b> :NERDTreeToggle<CR>
 map <F6> :Tlist<cr>
+map <F9> :TagbarToggle<CR>
 " airline buffer
 nnoremap <C-N> :bn<CR>
 nnoremap <C-P> :bp<CR>
 let g:ctrlp_map = '<c-p>'
+""" Buffers
+map <leader>bd :Bclose<cr>:tabclose<cr>gT    
+map <leader>ba :bufdo bd<cr>
 
 " ### General
 " ------------------------------------------------------------------------------------------------
@@ -213,6 +212,17 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
+if has("gui_running")
+    set lines=999 columns=999
+else
+    if exists("+lines")
+        set lines=50
+    endif
+    if exists("+columns")
+        set columns=100
+    endif
+endif
+
 "C-style indenting
 if has("cindent")
     set cindent
@@ -303,16 +313,15 @@ let Tlist_Use_Right_Window = 1     "display taglist as the right-most window
 let Tlist_File_Fold_Auto_Close=1   "fold the tag list of source files those not been edited
 let Tlist_Auto_Open=0              "auto start taglist
 
-"let Tlist_Ctags_Cmd = "/sw/bin/ctags-exuberant"
-"let Tlist_Sort_Type = "name"
-"let Tlist_Show_Menu = 1
-
 " ===== GtagsCscope =====
 
 let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Load = 1
 set cscopetag
+
+" ===== tagbar =====
+let g:tagbar_autofocus = 1
 
 " ===== Airline =====
 let g:airline_section_c = '%f'
