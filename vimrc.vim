@@ -1,6 +1,6 @@
 " #######################################################################
 " Created        :     Oct. 15, 2017
-" Modified       :     15/10/17 00:38:50
+" Modified       :     15/10/17
 " NOTE:    a singe vimrc file for easy tracking and sync
 "
 "
@@ -12,7 +12,7 @@
 "                  1 NERDTree
 "                  2 GtagsCscope
 "                  3 ctrlp
-"                  4 tagbar/taglist
+"                  4 tagbar
 "                  5 vim-signature
 "                  6 vim-syntax-extra
 "                  7 YouCompleteMe
@@ -23,7 +23,6 @@
 " ===== Quick Setting =====
 execute pathogen#infect()
 call pathogen#helptags()
-
 syntax enable
 syntax on
 filetype plugin indent on
@@ -62,8 +61,9 @@ set wrap
 
 " ??? Key mapping ref
 " ------------------------------------------------------------------------------------------------
-let mapleader=","                " e.g., <leader>w to save file
+let mapleader=","                            " e.g., <leader>w to save file
 let g:mapleader=","
+let g:ctrlp_map = '<c-p>'                    " CtrlP
 map <space> /                                " Map <Space>/C-<Space> to search
 map <leader>ss :setlocal spell!<cr>          " Spell checking
 
@@ -85,12 +85,10 @@ nmap <C-Down> :resize +2
 map <leader>q :e ~/buffer<cr>
 
 map <C-b> :NERDTreeToggle<CR>
-map <F6> :Tlist<cr>
 map <F9> :TagbarToggle<CR>
 " airline buffer
 nnoremap <C-N> :bn<CR>
 nnoremap <C-P> :bp<CR>
-let g:ctrlp_map = '<c-p>'
 """ Buffers
 map <leader>bd :Bclose<cr>:tabclose<cr>gT    
 map <leader>ba :bufdo bd<cr>
@@ -117,9 +115,6 @@ set smartcase
 let performance_mode=1           " No nice effect on status bar title
 let use_plugins_i_donot_use=0
 set laststatus=2                 " Always show the status line
-" Format the status line
-" set statusline=\ %{HasPaste()}%F%m%r\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l/%L\ \ Column:\ %c
-
 
 set hlsearch                     " Highlight search
 set incsearch
@@ -292,29 +287,13 @@ endfunction
 " ### Plugin
 " ------------------------------------------------------------------------------------------------
 " ===== NERDTree ====
-
 let NERDTreeShowLineNumbers=1
 let NERDTreeWinPos = "left" "where NERD tree window is placed on the screen
 "let NERDTreeWinSize = 31 "size of the NERD tree
 "close the nerdtree if it is the only tab left in the window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" ===== tag list (ctags) =====
-
-if has("win16") || ("win32")             "set the position of command ctags
-	let Tlist_Ctags_Cmd = 'ctags'
-else
-	let Tlist_Ctags_Cmd = '/usr/bin/ctags'
-endif
-
-let Tlist_Show_One_File = 1        "do not display multiple tag windows, only that for current source file is displayed
-let Tlist_Exit_OnlyWindow = 1      "if taglist is the last window, quit vim
-let Tlist_Use_Right_Window = 1     "display taglist as the right-most window
-let Tlist_File_Fold_Auto_Close=1   "fold the tag list of source files those not been edited
-let Tlist_Auto_Open=0              "auto start taglist
-
 " ===== GtagsCscope =====
-
 let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Load = 1
