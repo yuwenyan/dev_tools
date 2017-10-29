@@ -50,7 +50,8 @@ let g:airline_theme='bubblegum'
 "endif
 
 " === tab and space
-set expandtab                    " Use spaces instead of tabs
+" Use spaces instead of tabs
+set expandtab
 set smarttab
 set shiftwidth=4
 set tabstop=4
@@ -64,8 +65,10 @@ set wrap
 let mapleader=","                            " e.g., <leader>w to save file
 let g:mapleader=","
 let g:ctrlp_map = '<c-p>'                    " CtrlP
-map <space> /                                " Map <Space>/C-<Space> to search
-map <leader>ss :setlocal spell!<cr>          " Spell checking
+" Map <Space>/C-<Space> to search
+map <space> /
+" Spell checking
+map <leader>ss :setlocal spell!<cr>
 
 """ Move between windows
 map <C-j> <C-W>j
@@ -90,7 +93,7 @@ map <F9> :TagbarToggle<CR>
 nnoremap <C-N> :bn<CR>
 nnoremap <C-P> :bp<CR>
 """ Buffers
-map <leader>bd :Bclose<cr>:tabclose<cr>gT    
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
 map <leader>ba :bufdo bd<cr>
 
 " ### General
