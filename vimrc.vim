@@ -1,8 +1,7 @@
 " #######################################################################
 " Created        :     Oct. 15, 2017
-" Modified       :     15/10/17
+" Modified       :     2017/10/29 22:39:17
 " NOTE:    a singe vimrc file for easy tracking and sync
-"
 "
 " Index:
 "       === Quick Setting
@@ -17,8 +16,9 @@
 "                  6 vim-syntax-extra
 "                  7 YouCompleteMe
 "                  8 Colorschemes
-"                  9 Airline
+"                  9 Airline (themes)
 "                 10 nerdcommenter
+"                 11 indentLine
 " #######################################################################
 " ===== Quick Setting =====
 execute pathogen#infect()
@@ -28,7 +28,7 @@ syntax on
 filetype plugin indent on
 
 " === My information
-ia xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+ia xdate <c-r>=strftime("%Y/%m/%d %H:%M:%S")<cr>
 "iab xmail example@email.com
 
 " === Set color scheme:
@@ -329,4 +329,10 @@ map <leader>6 :b 6<CR>
 map <leader>7 :b 7<CR>
 map <leader>8 :b 8<CR>
 map <leader>9 :b 9<CR>
+
+" ===== indentLine =====
+let g:indentLine_leadingSpaceEnabled = 1
+let g:indentLine_enabled = 0
+
 " ------------------------------------------------------------------------------------------------
+
