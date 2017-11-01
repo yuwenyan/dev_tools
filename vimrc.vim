@@ -1,6 +1,6 @@
 " #######################################################################
 " Created        :     Oct. 15, 2017
-" Modified       :     2017/10/29 22:39:17
+" Modified       :     2017/11/01 00:33:52
 " NOTE:    a singe vimrc file for easy tracking and sync
 "
 " Index:
@@ -16,7 +16,7 @@
 "                  6 vim-syntax-extra
 "                  7 YouCompleteMe
 "                  8 Colorschemes
-"                  9 Airline (themes)
+"                  9 Airline (themes, powerline fonts)
 "                 10 nerdcommenter
 "                 11 indentLine
 " #######################################################################
@@ -333,6 +333,7 @@ map <leader>9 :b 9<CR>
 " ===== indentLine =====
 let g:indentLine_leadingSpaceEnabled = 1
 let g:indentLine_enabled = 0
+let g:indentLine_leadingSpaceChar = '.'
 
 " ------------------------------------------------------------------------------------------------
 
