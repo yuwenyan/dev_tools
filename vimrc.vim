@@ -32,11 +32,12 @@ ia xdate <c-r>=strftime("%Y/%m/%d %H:%M:%S")<cr>
 "iab xmail example@email.com
 
 " === Set color scheme:
-" desert, molokai, gruvbox, colorsbox-material, herald, pacific, lucius
+" desert, molokai, gruvbox, colorsbox-material, herald, pacific, lucius, ||torte
 if has('gui_running')
     colorscheme colorsbox-material
 else
-    colorscheme desert
+    set t_Co=256
+    colorscheme lucius
 endif
 set background=dark
 let g:airline_theme='bubblegum'
@@ -308,7 +309,7 @@ let g:tagbar_autofocus = 1
 " ===== Airline =====
 let g:airline_section_c = '%f'
 " airline fonts
-let g:airline_powerline_fonts = 1 
+let g:airline_powerline_fonts = 0
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11  " config font for gvim
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
