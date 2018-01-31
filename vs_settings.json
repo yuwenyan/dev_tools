@@ -1,0 +1,52 @@
+{
+    // ext:
+    // C++ Intellisense -- by austin
+    // C/C++ Advanced Lint
+    // diff
+    // Auto-Open Markdown Preview
+    // JSON Tools
+
+    "window.zoomLevel": 0,
+
+    // Show Symbol Treeview on startup.
+    "symbolTreeview.showOnStartup": false,
+    // Enable or disable the CppCheck linter
+    "c-cpp-flylint.cppcheck.enable": false,
+    // Enable or disable the Flexelint linter
+    "c-cpp-flylint.flexelint.enable": false,
+
+    "search.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/*.zip": true,
+        "**/*.d": true,
+        "**/*.map": true,
+        "**/*.out": true,
+        "**/tags": true,
+        "**/*.html": true,
+        "**/*.diff": true,
+        "*.diff": true,
+        "**/*.string": true,
+        "**/*.def": true,
+        "**/*.rej": true,
+        "**/*.o": true
+    },
+
+    "files.exclude": {
+        "**/*.d": true,
+        "**/*.map": true,
+        "**/*.out": true,
+        "**/*.rej": true,
+        "**/*.o": true
+    },
+    "window.title": "${dirty}${activeEditorLong}",
+    "workbench.activityBar.visible": true,
+    "editor.renderWhitespace": "boundary", // none, boundary, all
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+    "typescript.check.npmIsInstalled": false,
+	"editor.minimap.enabled": false,
+	"python.disablePromptForFeatures": [
+		"pylint"
+	]
+}
