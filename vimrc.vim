@@ -1,6 +1,6 @@
 " #######################################################################
 " Created        :     Oct. 15, 2017
-" Modified       :     2017/11/01 00:33:52
+" Modified       :     Sat Feb 10 09:54:06 PST 2018
 " NOTE:    a singe vimrc file for easy tracking and sync
 "
 " Index:
@@ -27,10 +27,6 @@ syntax enable
 syntax on
 filetype plugin indent on
 
-" === My information
-ia xdate <c-r>=strftime("%Y/%m/%d %H:%M:%S")<cr>
-"iab xmail example@email.com
-
 " === Set color scheme:
 " desert, molokai, gruvbox, colorsbox-material, herald, pacific, lucius, ||torte
 if has('gui_running')
@@ -41,14 +37,6 @@ else
 endif
 set background=dark
 let g:airline_theme='bubblegum'
-
-" === Highlight current
-"if has("gui_running")
-"    if exists("&cursorline")
-"        set cursorline
-"        set cursorcolumn
-"    endif
-"endif
 
 " === tab and space
 " Use spaces instead of tabs
@@ -96,6 +84,9 @@ nnoremap <C-P> :bp<CR>
 """ Buffers
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 map <leader>ba :bufdo bd<cr>
+
+" Compile:KEY
+map <F5> :call CompileRunGcc()<CR>
 
 " ### General
 " ------------------------------------------------------------------------------------------------
@@ -232,14 +223,6 @@ if has("autocmd")
     au BufNewFile,BufRead *.js,*.htc,*.c,*.tmpl,*.css ino $c /**<cr> **/<esc>O
 endif
 
-""" Parenthesis/bracket expanding
-vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-vnoremap $q <esc>`>a'<esc>`<i'<esc>
-vnoremap $w <esc>`>a"<esc>`<i"<esc>
-
 """ Parenthesis/bracket
 vnoremap $1 <esc>`>a)<esc>`<i(<esc>
 vnoremap $2 <esc>`>a]<esc>`<i[<esc>
@@ -287,6 +270,16 @@ function! HasPaste()
     return ''
 endfunction
 
+func! CompileRunGcc()
+        exec "w"
+        if &filetype == 'c'
+           exec "!gcc % -DLOCAL -o   %<"
+           exec "!time ./%<"
+        elseif &filetype == 'cpp'
+           exec "!g++ % -std=c++11 -DLOCAL -Dxiaoai -o    %<"
+           exec "!time ./%<"
+        endif
+endfunc
 
 " ### Plugin
 " ------------------------------------------------------------------------------------------------
@@ -320,16 +313,6 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
-
-map <leader>1 :b 1<CR>
-map <leader>2 :b 2<CR>
-map <leader>3 :b 3<CR>
-map <leader>4 :b 4<CR>
-map <leader>5 :b 5<CR>
-map <leader>6 :b 6<CR>
-map <leader>7 :b 7<CR>
-map <leader>8 :b 8<CR>
-map <leader>9 :b 9<CR>
 
 " ===== indentLine =====
 let g:indentLine_leadingSpaceEnabled = 1
