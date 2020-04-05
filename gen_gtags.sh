@@ -7,10 +7,14 @@ echo -ne '  [1/2] Searching files '
 
 # find . -name *.[ch] > gtags.files
 # ignore "./frc_core" -o(or)
-if [ -n "$1" -a "$1" == 'all' ];
-then
-    echo '[all] ... '
-    find . -name '*.c' -o -name '*.cpp' -o -name '*.h' > gtags.files
+if [ -n "$1" ]; then
+    if [ "$1" == 'all' ]; then
+        echo '[all] ... '
+        find . -name '*.c' -o -name '*.cpp' -o -name '*.h' > gtags.files
+    else
+        echo "[ $1 ] ..."
+        find "./$1" -name '*.c' -o -name '*.cpp' -o -name '*.h' > gtags.files
+    fi
 else
     echo '[faz] ... '
     find ./faz_core ./common ./include ./src -name '*.c' -o -name '*.cpp' -o -name '*.h' > gtags.files
